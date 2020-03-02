@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jugando extends Applet implements Runnable {
+	public static final int ARRIBA = 1004;
+	public static final int ABAJO = 1005;
+	public static final int IZQUIERDA = 1006;
+	public static final int DERECHA = 1007;
 
 	Thread animacion;
 	List<Mapa> BloquesMapa;
@@ -58,6 +62,8 @@ public class Jugando extends Applet implements Runnable {
 			// for(int i=0;i<enemigos.size();i++)
 			// enemigos.get(i).actualizar();
 			explotarBomba();
+			//jugador.actualizar(direccion, BloquesMapa);
+			jugador.chocarConBloquesMapa(BloquesMapa, LadrillosMapa, direccion);
 			this.repaint();
 			try {
 				Thread.sleep(50);
@@ -81,22 +87,19 @@ public class Jugando extends Applet implements Runnable {
 
 	public boolean keyDown(Event ev, int tecla) {
 
-		if (tecla == 1006) {
-				direccion = 0;
-			jugador.actualizar(direccion, BloquesMapa);
+		if (tecla == IZQUIERDA) {
+				direccion = IZQUIERDA;
 		}
-		if (tecla == 1007) {
-				direccion = 1;
-			jugador.actualizar(direccion, BloquesMapa);
+		if (tecla == DERECHA) {
+				direccion = DERECHA;
 		}
-		if (tecla == 1004) {
-				direccion = 2;
-			jugador.actualizar(direccion, BloquesMapa);
+		if (tecla == ARRIBA) {
+				direccion = ARRIBA;
 		}
-		if (tecla == 1005) {
-				direccion = 3;
-			jugador.actualizar(direccion, BloquesMapa);
+		if (tecla == ABAJO) {
+				direccion = ABAJO;
 		}
+		jugador.actualizar(direccion, BloquesMapa);
 		if (tecla == 32) {
 			colocarBomba();
 		}
